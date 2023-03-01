@@ -1,0 +1,12 @@
+{
+  "login": {
+    "welocme": "Welcome to KskCrenspireTask",
+    "name": "Login",
+    "description": "*Please Login to see further details*"
+  },
+
+  "Headers": {
+    "title": "Dashboard",
+    "logout": "LOGOUT"
+  }
+}

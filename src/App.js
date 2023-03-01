@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import routesConfig from "./config/routesConfig.json";
+import { LoginDialog } from "./components/Login/login";
+import { Dashboard } from "./components/Dashboard/dashboard";
+import { CustomAppBar } from "./components/AppBar/appBar";
+import "./App.css";
 
+const { homeRoute, loginRoute, dashboardRoute } = routesConfig.ROUTES;
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <CustomAppBar />
+      <Routes>
+        <Route
+          path={homeRoute}
+          element={<Navigate replace to={loginRoute} />}
+        />
+        <Route path={loginRoute} element={<LoginDialog />} />
+        <Route path={dashboardRoute} element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
