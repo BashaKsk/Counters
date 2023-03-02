@@ -40,6 +40,10 @@ const dashBoardSlice = createSlice({
     clearDashBoardErrors: (state) => {
       state.error = null;
     },
+    clearFilters: (state) => {
+      state.filteredData = state.data.items;
+      state.checkedBoxes = []
+    },
     toggleCheckbox: (state, action) => {
       const { value, checked } = action.payload;
       if (checked) {
@@ -76,4 +80,5 @@ const dashBoardSlice = createSlice({
 
 export const dashBoardReducer = dashBoardSlice.reducer;
 
-export const { clearDashBoardErrors, toggleCheckbox } = dashBoardSlice.actions;
+export const { clearDashBoardErrors, toggleCheckbox, clearFilters } =
+  dashBoardSlice.actions;
