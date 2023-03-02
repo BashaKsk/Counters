@@ -81,19 +81,13 @@ const columns = [
 export const CustomDataGrid = ({ rows }) => {
   const [page, setPage] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(10);
-  console.log(rows);
-  const updatedRows = rows.map((item, index) => {
-    return {
-      ...item,
-      id: index,
-    };
-  });
+ 
 
   return (
     <Grid container sx={gridBoxStyles}>
       <Grid item xs={12} sm={12} md={10} sx={gridItemStyles}>
         <DataGrid
-          rows={updatedRows}
+          rows={rows}
           columns={columns}
           pageSize={pageSize}
           page={page}
