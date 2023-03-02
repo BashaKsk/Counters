@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearDashBoardErrors,
+  clearFilters,
   fetchDashBoardData,
   toggleCheckbox,
 } from "../../redux/features/dashboard/dashboardSlice";
@@ -46,7 +47,7 @@ export const Dashboard = () => {
       setdata(updatedData);
     }
   }, [dispatch, dashBoardState, reset]);
-
+  console.log(dashBoardState.filteredData);
   useEffect(() => {
     if (dashBoardState.checkedBoxes.length > 0) {
       setShowAllCheck(false);
@@ -70,6 +71,7 @@ export const Dashboard = () => {
     const { checked } = event.target;
     if (checked) {
       setShowAllCheck(true);
+      dispatch(clearFilters());
       setReset((prev) => !prev);
     } else {
       setShowAllCheck(false);
@@ -91,7 +93,13 @@ export const Dashboard = () => {
           <Grid item xs={2} md={1}>
             <FormControlLabel
               sx={type0Styles}
-              control={<Checkbox value={0} onChange={handleCheckboxChange} />}
+              control={
+                <Checkbox
+                  value={0}
+                  checked={dashBoardState.checkedBoxes.includes(0) ? 1 : 0}
+                  onChange={handleCheckboxChange}
+                />
+              }
               label="Type 0"
             />
           </Grid>
@@ -99,14 +107,26 @@ export const Dashboard = () => {
           <Grid item xs={2} md={1}>
             <FormControlLabel
               sx={type1Styles}
-              control={<Checkbox value={1} onChange={handleCheckboxChange} />}
+              control={
+                <Checkbox
+                  value={1}
+                  checked={dashBoardState.checkedBoxes.includes(1) ? 1 : 0}
+                  onChange={handleCheckboxChange}
+                />
+              }
               label="Type 1"
             />
           </Grid>
           <Grid item xs={2} md={1}>
             <FormControlLabel
               sx={type2Styles}
-              control={<Checkbox value={2} onChange={handleCheckboxChange} />}
+              control={
+                <Checkbox
+                  value={2}
+                  checked={dashBoardState.checkedBoxes.includes(2) ? 1 : 0}
+                  onChange={handleCheckboxChange}
+                />
+              }
               label="Type 2"
             />
           </Grid>
@@ -114,14 +134,26 @@ export const Dashboard = () => {
           <Grid item xs={2} md={1}>
             <FormControlLabel
               sx={type3Styles}
-              control={<Checkbox value={3} onChange={handleCheckboxChange} />}
+              control={
+                <Checkbox
+                  value={3}
+                  checked={dashBoardState.checkedBoxes.includes(3) ? 1 : 0}
+                  onChange={handleCheckboxChange}
+                />
+              }
               label="Type 3"
             />
           </Grid>
           <Grid item xs={2} md={1}>
             <FormControlLabel
               sx={type4Styles}
-              control={<Checkbox value={4} onChange={handleCheckboxChange} />}
+              control={
+                <Checkbox
+                  value={4}
+                  checked={dashBoardState.checkedBoxes.includes(4) ? 1 : 0}
+                  onChange={handleCheckboxChange}
+                />
+              }
               label="Type 4"
             />
           </Grid>
