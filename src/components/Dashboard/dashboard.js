@@ -26,11 +26,34 @@ export const Dashboard = () => {
   const dashBoardState = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(true);
-  console.log(dashBoardState.filteredData);
+  const [data, setdata] = React.useState([]);
+  const [reset, setReset] = React.useState(false);
+  const [showAllCheck, setShowAllCheck] = React.useState(true);
   useEffect(() => {
     dispatch(fetchDashBoardData());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (dashBoardState.filteredData) {
+      //data grid expects an id field  to be exist in our collection
+      //this useEffect is is not needed in actual project as there'll be an id presetn in each collection
+      const updatedData = dashBoardState.filteredData.map((item, index) => {
+        return {
+          ...item,
+          id: index,
+        };
+      });
+      setdata(updatedData);
+    }
+  }, [dispatch, dashBoardState, reset]);
+
+  useEffect(() => {
+    if (dashBoardState.checkedBoxes.length > 0) {
+      setShowAllCheck(false);
+    } else {
+      setShowAllCheck(true);
+    }
+  }, [dispatch, dashBoardState.checkedBoxes.length]);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -43,13 +66,25 @@ export const Dashboard = () => {
     const { value, checked } = event.target;
     dispatch(toggleCheckbox({ value, checked }));
   }
+  function handleAllCheckBox(event) {
+    const { checked } = event.target;
+    if (checked) {
+      setShowAllCheck(true);
+      setReset((prev) => !prev);
+    } else {
+      setShowAllCheck(false);
+      setdata([]);
+    }
+  }
   return (
     <Box>
       <FormGroup>
         <Grid container sx={checkBoxContainerStyles}>
           <Grid item xs={2} md={1}>
             <FormControlLabel
-              control={<Checkbox checked={true} />}
+              control={
+                <Checkbox onChange={handleAllCheckBox} checked={showAllCheck} />
+              }
               label="All"
             />
           </Grid>
@@ -93,24 +128,17 @@ export const Dashboard = () => {
         </Grid>
       </FormGroup>
       {dashBoardState.loading && (
-        <Lottie
-          loop
-          animationData={Loader}
-          fontSize={1000}
-          play
-        />
+        <Lottie loop animationData={Loader} fontSize={1000} play />
       )}
-      {!dashBoardState.loading && dashBoardState.error ? (
+      {!dashBoardState.loading && dashBoardState.error && (
         <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error">
             {dashBoardState.error}
           </Alert>
         </Snackbar>
-      ) : null}
-      {!dashBoardState.loading && dashBoardState.filteredData ? (
-        <CustomDataGrid rows={dashBoardState.filteredData} />
-      ) : (
-        <Box></Box>
+      )}
+      {!dashBoardState.loading && dashBoardState.filteredData && (
+        <CustomDataGrid rows={data} />
       )}
     </Box>
   );
