@@ -1,24 +1,40 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import routesConfig from "./config/routesConfig.json";
-import { LoginDialog } from "./components/Login/login";
-import { Dashboard } from "./components/Dashboard/dashboard";
-import { CustomAppBar } from "./components/AppBar/appBar";
 import "./App.css";
-
-const { homeRoute, loginRoute, dashboardRoute } = routesConfig.ROUTES;
+import ContextCounterApp from "./components/ContextCounter";
+import ReduxCounter from "./components/ReduxCounter";
+import { ContextCounter } from "./contexts/counterContext";
+import { useState } from "react";
 function App() {
+  const [value, setvalue] = useState(0);
+
+  const handleIncrement = () => {
+    setvalue((prev) => prev + 1);
+  };
+
+  const handleDecrement = () => {
+    setvalue((prev) => prev - 1);
+  };
+
+  const handleReset = () => {
+    setvalue(0);
+  };
   return (
-    <BrowserRouter>
-      <CustomAppBar />
-      <Routes>
-        <Route
-          path={homeRoute}
-          element={<Navigate replace to={loginRoute} />}
-        />
-        <Route path={loginRoute} element={<LoginDialog />} />
-        <Route path={dashboardRoute} element={<Dashboard />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+        <h1 style={{textAlign : "center"}}>Counter in Two Ways </h1>
+
+      <div className="App">
+        <ReduxCounter />
+        <ContextCounter.Provider
+          value={{
+            count: value,
+            increase: handleIncrement,
+            decrease: handleDecrement,
+            reset: handleReset,
+          }}
+        >
+          <ContextCounterApp />
+        </ContextCounter.Provider>
+      </div>
+    </>
   );
 }
 

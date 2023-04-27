@@ -1,7 +1,0 @@
-{
-  "ROUTES": {
-    "homeRoute": "/",
-    "loginRoute": "/login",
-    "dashboardRoute": "/dashboard"
-  }
-}
