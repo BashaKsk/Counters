@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import "./App.css";
 import ContextCounterApp from "./components/ContextCounter";
 import ReduxCounter from "./components/ReduxCounter";
@@ -19,20 +20,27 @@ function App() {
   };
   return (
     <>
-        <h1 style={{textAlign : "center"}}>Counter in Two Ways </h1>
+      <h1 style={{ textAlign: "center" }}>Counter in Two Ways </h1>
 
       <div className="App">
-        <ReduxCounter />
-        <ContextCounter.Provider
-          value={{
-            count: value,
-            increase: handleIncrement,
-            decrease: handleDecrement,
-            reset: handleReset,
-          }}
-        >
-          <ContextCounterApp />
-        </ContextCounter.Provider>
+        <Grid container>
+          <Grid item xs={12} sm={12} md={6}>
+            {" "}
+            <ReduxCounter />
+          </Grid>
+          <Grid item xs={12} sm={12} md={6}>
+            <ContextCounter.Provider
+              value={{
+                count: value,
+                increase: handleIncrement,
+                decrease: handleDecrement,
+                reset: handleReset,
+              }}
+            >
+              <ContextCounterApp />
+            </ContextCounter.Provider>
+          </Grid>
+        </Grid>
       </div>
     </>
   );
