@@ -21,11 +21,9 @@ function App() {
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Counter in Two Ways </h1>
-
       <div className="App">
         <Grid container>
           <Grid item xs={12} sm={12} md={6}>
-            {" "}
             <ReduxCounter />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>

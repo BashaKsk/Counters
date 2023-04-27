@@ -12,7 +12,7 @@ const ContextCounterApp = () => {
           return (
             <div>
               <h1>Context Counter: {count}</h1>
-              <Box sx={{ mt: 20}}>
+              <Box sx={{ mt: 20 }}>
                 <ContextChildCounter />
               </Box>
             </div>

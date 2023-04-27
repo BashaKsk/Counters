@@ -4,7 +4,7 @@ const initialState = {
   count: 0,
   increase: () => {},
   decrease: () => {},
-  reset : () => {}
+  reset: () => {},
 };
 
 export const ContextCounter = createContext(initialState);

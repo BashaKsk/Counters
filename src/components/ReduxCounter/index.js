@@ -9,10 +9,9 @@ function ReduxCounter() {
   return (
     <div>
       <h1>Redux Counter: {counter.value}</h1>
-      <Box sx={{ mt: 20}}>
-      <ReduxCounterChild />
-              </Box>
-    
+      <Box sx={{ mt: 20 }}>
+        <ReduxCounterChild />
+      </Box>
     </div>
   );
 }

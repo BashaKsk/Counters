@@ -20,4 +20,4 @@ const ReduxCounter = createSlice({
 });
 
 export const ReduxCounterReducer = ReduxCounter.reducer;
-export const { increment, decrement ,reset} = ReduxCounter.actions;
+export const { increment, decrement, reset } = ReduxCounter.actions;

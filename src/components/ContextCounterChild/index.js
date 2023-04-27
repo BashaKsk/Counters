@@ -9,16 +9,22 @@ const ContextChildCounter = () => {
         {(value) => {
           const { count, increase, reset, decrease } = value;
           return (
-            <div
-              style={ButtonStyles}
-            >
-              <Button variant="contained" color="success" onClick={() => increase()}>
+            <div style={ButtonStyles}>
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => increase()}
+              >
                 Increase
               </Button>
               <Button variant="contained" onClick={() => reset()}>
                 Reset
               </Button>
-              <Button variant="contained" color="secondary"  onClick={() => decrease()}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => decrease()}
+              >
                 Decrease
               </Button>
             </div>
